@@ -53,7 +53,7 @@ download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUC
                
                ## 2: Extract the mean and standard deviation
                ```{r}
-               meansd <- All[, c(1, grep(pattern = 'mean\\(\\)|std\\(\\)', x = names(All)), 563)]
+               meansd <- All[, c(1, grep(pattern = 'mean\\(\\)|std\\(\\)', x = names(All))]
                #select only variables with mean and std - excludes meanFreq() and angle()
                ```
                
@@ -64,9 +64,7 @@ download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUC
                meansd$activity <- factor(meansd$activityLabels,
                levels = data1$activityLabels,
                labels = data1$activityName)
-               #make a new column that considers the activityLabels column a factor of 6 levels, 
-               #with the label the same as the activity name
-               meansd <- meansd[, -68]
+               
                #remove the activity labels column to tidy up the data
                names(meansd)
                #double check that the activityLabels column is gone
@@ -77,7 +75,6 @@ download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUC
                ```{r}
                colnames(meansd) <- gsub(pattern = '\\(\\)', replacement = "", x = names(meansd))
                #remove the () for the mean and std in the measurements
-               meansd <- meansd[, c(1, 68, 2:67)]
                #move the activity column to the second column
                write.table(meansd, file = 'tidy.txt', row.names = F, quote = F, sep = "\t")
                ```
